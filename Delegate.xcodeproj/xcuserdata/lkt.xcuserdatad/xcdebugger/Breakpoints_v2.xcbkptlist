@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "8B797CDB-7A63-4018-9F73-EE2A55A8BBDE"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D298BF15-84F7-455D-BBF3-4E6E4305CD4D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Delegate/ViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "setupSelectionViews()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D298BF15-84F7-455D-BBF3-4E6E4305CD4D - 83fb2639a681298e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Delegate.ViewController.setupConstraint() -&gt; ()"
+                  moduleName = "Delegate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lkt/Developer/Delegate/Delegate/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "244">
+               </Location>
+               <Location
+                  uuid = "D298BF15-84F7-455D-BBF3-4E6E4305CD4D - 50cf13dbac4fe71d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Delegate.ViewController.setupSelectionViews() -&gt; ()"
+                  moduleName = "Delegate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lkt/Developer/Delegate/Delegate/ViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "244">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "072F6D73-E129-4807-BE68-74DABA2721C0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Delegate/SelectionView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "init(frame:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "06949A76-9E51-4420-8E06-FACFB4952DE8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Delegate/SelectionView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "configureStackViews(buttonModels:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "06949A76-9E51-4420-8E06-FACFB4952DE8 - 1a51c8ea38495244"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Delegate.SelectionView.configureStackViews() -&gt; ()"
+                  moduleName = "Delegate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lkt/Developer/Delegate/Delegate/SelectionView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "100">
+               </Location>
+               <Location
+                  uuid = "06949A76-9E51-4420-8E06-FACFB4952DE8 - 1a51c8ea38495244"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Delegate.SelectionView.configureStackViews() -&gt; ()"
+                  moduleName = "Delegate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lkt/Developer/Delegate/Delegate/SelectionView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "116">
+               </Location>
+               <Location
+                  uuid = "06949A76-9E51-4420-8E06-FACFB4952DE8 - 1a51c8ea38495244"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Delegate.SelectionView.configureStackViews() -&gt; ()"
+                  moduleName = "Delegate"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lkt/Developer/Delegate/Delegate/SelectionView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "128">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

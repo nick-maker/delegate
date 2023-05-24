@@ -13,6 +13,8 @@
 		0680A1992A1E095A009A66EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0680A1972A1E095A009A66EA /* Main.storyboard */; };
 		0680A19B2A1E095C009A66EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0680A19A2A1E095C009A66EA /* Assets.xcassets */; };
 		0680A19E2A1E095C009A66EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0680A19C2A1E095C009A66EA /* LaunchScreen.storyboard */; };
+		0680A1A62A1E09D6009A66EA /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0680A1A52A1E09D6009A66EA /* SelectionView.swift */; };
+		0680A1A82A1E0D34009A66EA /* ButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0680A1A72A1E0D34009A66EA /* ButtonModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		0680A19A2A1E095C009A66EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0680A19D2A1E095C009A66EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0680A19F2A1E095C009A66EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0680A1A52A1E09D6009A66EA /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
+		0680A1A72A1E0D34009A66EA /* ButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +62,9 @@
 			children = (
 				0680A1912A1E095A009A66EA /* AppDelegate.swift */,
 				0680A1932A1E095A009A66EA /* SceneDelegate.swift */,
+				0680A1A72A1E0D34009A66EA /* ButtonModel.swift */,
 				0680A1952A1E095A009A66EA /* ViewController.swift */,
+				0680A1A52A1E09D6009A66EA /* SelectionView.swift */,
 				0680A1972A1E095A009A66EA /* Main.storyboard */,
 				0680A19A2A1E095C009A66EA /* Assets.xcassets */,
 				0680A19C2A1E095C009A66EA /* LaunchScreen.storyboard */,
@@ -140,7 +146,9 @@
 			files = (
 				0680A1962A1E095A009A66EA /* ViewController.swift in Sources */,
 				0680A1922A1E095A009A66EA /* AppDelegate.swift in Sources */,
+				0680A1A82A1E0D34009A66EA /* ButtonModel.swift in Sources */,
 				0680A1942A1E095A009A66EA /* SceneDelegate.swift in Sources */,
+				0680A1A62A1E09D6009A66EA /* SelectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
