@@ -12,7 +12,7 @@ class SelectionView: UIView {
     weak var delegate: SelectionViewDelegate?
     weak var dataSource: SelectionViewDataSource? {
         didSet {
-            configureStackViews(buttonModels: [])
+            configureStackViews()
             configureColorView()
         }
     }
@@ -39,17 +39,19 @@ class SelectionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureStackViews(buttonModels: [ButtonModel]) {
+    func configureStackViews() {
         stackView.axis = .horizontal
         stackView.spacing = 10
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         
-        let numberOfButtons = buttonModels.count
+        let numberOfButtons = dataSource?.numberOfButtons(for: self) ?? 2
         
         for index in 0..<numberOfButtons {
+            print(numberOfButtons)
             let button = UIButton()
-            button.setTitle(buttonModels[index].title, for: .normal)
+            let buttonModels = dataSource?.setButtons(at: index)
+            button.setTitle(buttonModels?.title, for: .normal)
             button.setTitleColor(dataSource?.titleColorForButton(at: index), for: .normal)
             button.titleLabel?.font = UIFont.systemFont(ofSize: dataSource?.buttonFontSize() ?? 18)
             button.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
@@ -80,9 +82,9 @@ class SelectionView: UIView {
         ]
         NSLayoutConstraint.activate(constraintsArray)
     }
-
+    
     func configureColorView() {
-        guard let buttonModel = dataSource?.topButtons.first else {
+        guard let buttonModel = dataSource?.setButtons(at: 0) else {
             return
         }
         
@@ -99,20 +101,16 @@ class SelectionView: UIView {
     }
     
     @objc func buttonClicked(_ sender: UIButton) {
-        guard let index = buttons.firstIndex(of: sender) else {
-            return
-        }
+        guard let index = buttons.firstIndex(of: sender) else { return }
+        let isSelectable = delegate?.shouldSelectedButton?(self, at: index)
+        print(isSelectable!)
+        guard isSelectable == true else { return }
+        delegate?.didSelectedButton?(self, at: index)
+        animation(sender: sender)
         
-        var buttonModels: [ButtonModel]
-        if index < dataSource?.topButtons.count ?? 0 {
-            buttonModels = dataSource?.topButtons ?? []
-        } else {
-            buttonModels = dataSource?.bottomButtons ?? []
-        }
-        
-        let buttonModel = buttonModels[index]
-        colorView.backgroundColor = buttonModel.color
-        
+    }
+    
+    func animation(sender: UIButton) {
         constraintsArray = [
             indicatorView.centerXAnchor.constraint(equalTo: sender.centerXAnchor),
             indicatorView.bottomAnchor.constraint(equalTo: colorView.topAnchor),
@@ -124,11 +122,6 @@ class SelectionView: UIView {
             self.layoutIfNeeded()
         }
         animator.startAnimation()
-        
-        // Call the delegate method
-        delegate?.didSelectedButton?(self, at: index)
-        
-        
     }
     
     
@@ -143,11 +136,15 @@ class SelectionView: UIView {
 }
 
 protocol SelectionViewDataSource: AnyObject {
-    var topButtons: [ButtonModel] { get }
-    var bottomButtons: [ButtonModel] { get }
+    
+    func setButtons(at index: Int) -> ButtonModel
+    
     func numberOfButtons(for selectionView: SelectionView) -> Int
+    
     func titleColorForButton(at index: Int) -> UIColor
+    
     func buttonFontSize() -> CGFloat
+    
     func indicatorViewColor() -> UIColor
     
 }

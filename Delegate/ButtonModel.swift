@@ -16,7 +16,7 @@ struct ButtonModel {
 
 let topSource = [
     ButtonModel(color: .red, title: "Red"),
-    ButtonModel(color: .yellow, title: "Yellow")
+    ButtonModel(color: .yellow, title: "Yellow"),
 ]
 
 let bottomSource = [

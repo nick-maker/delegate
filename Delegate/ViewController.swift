@@ -9,13 +9,12 @@ import UIKit
 
 class ViewController: UIViewController, SelectionViewDelegate, SelectionViewDataSource {
     
-    var topButtons = topSource
-    
-    var bottomButtons = bottomSource
-    
     let topSelectionView = SelectionView()
     
     let bttmSelectionView = SelectionView()
+    
+    var isSelectable = true
+    var isTopLastButtonSelected = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +23,7 @@ class ViewController: UIViewController, SelectionViewDelegate, SelectionViewData
     }
     
     func setupSelectionViews() {
-
+        
         topSelectionView.delegate = self
         topSelectionView.dataSource = self
         bttmSelectionView.delegate = self
@@ -35,7 +34,7 @@ class ViewController: UIViewController, SelectionViewDelegate, SelectionViewData
         [topSelectionView, bttmSelectionView ].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
-        
+            
             topSelectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             topSelectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             topSelectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
@@ -48,21 +47,29 @@ class ViewController: UIViewController, SelectionViewDelegate, SelectionViewData
             
         ])
         
-        topSelectionView.configureStackViews(buttonModels: topButtons)
-        bttmSelectionView.configureStackViews(buttonModels: bottomButtons)
     }
     
     
     func didSelectedButton(_ selectionView: SelectionView, at index: Int) {
-        if selectionView === topSelectionView {
-            if index == (topSelectionView.buttons.count - 1) {
-                bttmSelectionView.isUserInteractionEnabled = false
-            } else {
-                bttmSelectionView.isUserInteractionEnabled = true
-            }
+        if selectionView == topSelectionView {
+            selectionView.colorView.backgroundColor = topSource[index].color
+            isTopLastButtonSelected = (index == topSelectionView.buttons.count - 1)
+        } else {
+            selectionView.colorView.backgroundColor = bottomSource[index].color
         }
     }
-
+    
+    func shouldSelectedButton(_ selectionView: SelectionView, at index: Int) -> Bool {
+        if selectionView == topSelectionView {
+            return true
+        } else if selectionView == bttmSelectionView {
+            if isTopLastButtonSelected {
+                return false
+            }
+        }
+        return true
+    }
+    
     
     func titleColorForButton(at index: Int) -> UIColor {
         .white
@@ -75,14 +82,30 @@ class ViewController: UIViewController, SelectionViewDelegate, SelectionViewData
     func indicatorViewColor() -> UIColor {
         .white
     }
-
+    
+    func setButtons(at index: Int) -> ButtonModel {
+        if index < topSource.count {
+            return topSource[index]
+        } else {
+            return bottomSource[index]
+        }
+    }
+//
+//    func setButtons(at index: Int) -> [ButtonModel] {
+//        if index < topSource.count {
+//            return topSource
+//        } else {
+//            return bottomSource
+//        }
+//    }
+    
     func numberOfButtons(for selectionView: SelectionView) -> Int {
         if selectionView == topSelectionView {
-            return topButtons.count
+            return topSource.count
         } else if selectionView == bttmSelectionView {
-            return bottomButtons.count
+            return bottomSource.count
         } else {
-            return 0 // Return the appropriate number of buttons for upcoming views
+            return 0
         }
     }
 }
