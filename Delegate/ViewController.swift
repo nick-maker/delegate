@@ -53,7 +53,7 @@ class ViewController: UIViewController, SelectionViewDelegate, SelectionViewData
     }
     
     
-    func shouldSelectedButton(_ selectionView: SelectionView, at index: Int) -> Bool {
+    func didSelectedButton(_ selectionView: SelectionView, at index: Int) {
         if selectionView === topSelectionView {
             if index == (topSelectionView.buttons.count - 1) {
                 bttmSelectionView.isUserInteractionEnabled = false
@@ -61,7 +61,6 @@ class ViewController: UIViewController, SelectionViewDelegate, SelectionViewData
                 bttmSelectionView.isUserInteractionEnabled = true
             }
         }
-        return true
     }
 
     

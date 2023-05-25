@@ -69,6 +69,35 @@ class SelectionView: UIView {
         
     }
     
+    func configureIndicatorView() {
+        indicatorView.backgroundColor = dataSource?.indicatorViewColor() ?? .white
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        constraintsArray = [
+            indicatorView.centerXAnchor.constraint(equalTo: buttons[0].centerXAnchor),
+            indicatorView.bottomAnchor.constraint(equalTo: colorView.topAnchor),
+            indicatorView.widthAnchor.constraint(equalTo: buttons[0].widthAnchor),
+            indicatorView.heightAnchor.constraint(equalToConstant: 3)
+        ]
+        NSLayoutConstraint.activate(constraintsArray)
+    }
+
+    func configureColorView() {
+        guard let buttonModel = dataSource?.topButtons.first else {
+            return
+        }
+        
+        colorView.backgroundColor = buttonModel.color
+        
+        colorView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            colorView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            colorView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            colorView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            colorView.heightAnchor.constraint(equalToConstant: 100),
+        ])
+    }
+    
     @objc func buttonClicked(_ sender: UIButton) {
         guard let index = buttons.firstIndex(of: sender) else {
             return
@@ -97,39 +126,9 @@ class SelectionView: UIView {
         animator.startAnimation()
         
         // Call the delegate method
-        delegate?.shouldSelectedButton?(self, at: index)
+        delegate?.didSelectedButton?(self, at: index)
         
         
-    }
-    
-    func configureIndicatorView() {
-        indicatorView.backgroundColor = dataSource?.indicatorViewColor() ?? .white
-        indicatorView.translatesAutoresizingMaskIntoConstraints = false
-        constraintsArray = [
-            indicatorView.centerXAnchor.constraint(equalTo: buttons[0].centerXAnchor),
-            indicatorView.bottomAnchor.constraint(equalTo: colorView.topAnchor),
-            indicatorView.widthAnchor.constraint(equalTo: buttons[0].widthAnchor),
-            indicatorView.heightAnchor.constraint(equalToConstant: 3)
-        ]
-        NSLayoutConstraint.activate(constraintsArray)
-    }
-
-    
-    func configureColorView() {
-        guard let buttonModel = dataSource?.topButtons.first else {
-            return
-        }
-        
-        colorView.backgroundColor = buttonModel.color
-        
-        colorView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            colorView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            colorView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            colorView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            colorView.heightAnchor.constraint(equalToConstant: 100),
-        ])
     }
     
     
