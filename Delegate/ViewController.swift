@@ -20,7 +20,6 @@ class ViewController: UIViewController, SelectionViewDelegate, SelectionViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
-        print(topButtons)
         setupSelectionViews()
     }
     
@@ -51,9 +50,6 @@ class ViewController: UIViewController, SelectionViewDelegate, SelectionViewData
         
         topSelectionView.configureStackViews(buttonModels: topButtons)
         bttmSelectionView.configureStackViews(buttonModels: bottomButtons)
-        
-        
-        
     }
     
     

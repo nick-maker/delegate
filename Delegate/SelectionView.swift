@@ -10,19 +10,28 @@ import UIKit
 class SelectionView: UIView {
     
     weak var delegate: SelectionViewDelegate?
-    weak var dataSource: SelectionViewDataSource?
+    weak var dataSource: SelectionViewDataSource? {
+        didSet {
+            configureStackViews(buttonModels: [])
+            configureColorView()
+        }
+    }
     
     var indicatorView = UIView()
     var colorView = UIView()
     var stackView: UIStackView
     var buttons: [UIButton] = []
+    var constraintsArray: [NSLayoutConstraint] = [] {
+        didSet {
+            UIKit.NSLayoutConstraint.deactivate(oldValue)
+            UIKit.NSLayoutConstraint.activate(constraintsArray)
+        }
+    }
     
     override init(frame: CGRect) {
         stackView = UIStackView() //has to be before super.init
         super.init(frame: frame)
         [ stackView, indicatorView, colorView ].forEach{ addSubview($0) }
-        configureStackViews(buttonModels: [])
-        configureIndicatorView()
         
     }
     
@@ -37,18 +46,17 @@ class SelectionView: UIView {
         stackView.distribution = .fillEqually
         
         let numberOfButtons = buttonModels.count
-           
-           for index in 0..<numberOfButtons {
-               let button = UIButton()
-               button.setTitle(buttonModels[index].title, for: .normal)
-               button.setTitleColor(dataSource?.titleColorForButton(at: index), for: .normal)
-               button.titleLabel?.font = UIFont.systemFont(ofSize: dataSource?.buttonFontSize() ?? 18)
-               button.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
-               buttons.append(button)
-               stackView.addArrangedSubview(button)
-               indicatorAnimation()
-               configureColorView()
-           }
+        
+        for index in 0..<numberOfButtons {
+            let button = UIButton()
+            button.setTitle(buttonModels[index].title, for: .normal)
+            button.setTitleColor(dataSource?.titleColorForButton(at: index), for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: dataSource?.buttonFontSize() ?? 18)
+            button.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
+            buttons.append(button)
+            stackView.addArrangedSubview(button)
+            configureIndicatorView()
+        }
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -76,18 +84,19 @@ class SelectionView: UIView {
         let buttonModel = buttonModels[index]
         colorView.backgroundColor = buttonModel.color
         
-        let buttonCenterX = sender.center.x
-            let indicatorCenterX = buttonCenterX - stackView.frame.origin.x
+        constraintsArray = [
+            indicatorView.centerXAnchor.constraint(equalTo: sender.centerXAnchor),
+            indicatorView.bottomAnchor.constraint(equalTo: colorView.topAnchor),
+            indicatorView.widthAnchor.constraint(equalTo: sender.widthAnchor),
+            indicatorView.heightAnchor.constraint(equalToConstant: 3)
+        ]
         
         let animator = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut) {
-            self.indicatorView.center.x = indicatorCenterX
             self.layoutIfNeeded()
         }
-        
         animator.startAnimation()
         
         // Call the delegate method
-        delegate?.didSelectedButton?(self, at: index)
         delegate?.shouldSelectedButton?(self, at: index)
         
         
@@ -96,24 +105,15 @@ class SelectionView: UIView {
     func configureIndicatorView() {
         indicatorView.backgroundColor = dataSource?.indicatorViewColor() ?? .white
         indicatorView.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    func indicatorAnimation() {
-        var constraintsArray: [NSLayoutConstraint] = [] {
-            didSet {
-                UIKit.NSLayoutConstraint.deactivate(oldValue)
-                UIKit.NSLayoutConstraint.activate(constraintsArray)
-            }
-        }
-        
         constraintsArray = [
             indicatorView.centerXAnchor.constraint(equalTo: buttons[0].centerXAnchor),
             indicatorView.bottomAnchor.constraint(equalTo: colorView.topAnchor),
             indicatorView.widthAnchor.constraint(equalTo: buttons[0].widthAnchor),
-            indicatorView.heightAnchor.constraint(equalToConstant: 5)
+            indicatorView.heightAnchor.constraint(equalToConstant: 3)
         ]
         NSLayoutConstraint.activate(constraintsArray)
     }
+
     
     func configureColorView() {
         guard let buttonModel = dataSource?.topButtons.first else {
